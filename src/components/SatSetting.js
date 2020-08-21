@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import {InputNumber} from 'antd';
+import {InputNumber, Button} from 'antd';
 
 class SatSetting extends Component {
     constructor(){
         super();
         this.state = {
             observerLat: 0,
-            observerLong: 0
+            observerLong: 0,
+            observeAlt: 0,
+            radius:90,
         }
     }
 
@@ -22,6 +24,23 @@ class SatSetting extends Component {
         this.setState({
             observerLat: value
         })
+    }
+
+    onChangeAlt = (value) => {
+        console.log('value ', value)
+        this.setState({
+            observerAlt: value
+        })
+    }
+
+    onChangeRadius = (value) => {
+        this.setState({
+            radius: value
+        })
+    }
+
+    showSatellite = () => {
+        this.props.onShow(this.state); // 在main.js里定义了这个props是一个函数，到main.js里的SatSetting component里找
     }
 
     render() {
@@ -57,13 +76,36 @@ class SatSetting extends Component {
                         <div className="list-item">
                             <label>Elevation(meters): </label>
                             <InputNumber
-                                min={-413}
-                                max={8850}
+                                min={0}
+                                max={90}
                                 defaultValue={0}
                                 style={{margin: "0 2px"}}
-                                onChange={this.onChangeEle}
+                                onChange={this.onChangeAlt}
                             />
                         </div>
+                    </div>
+                    <p className="setting-label">Restrictions</p>
+                    <div className="setting-list">
+                        <div className="list-item">
+                            <label>Search Radius </label>
+                            <InputNumber
+                                min={0}
+                                max={90}
+                                defaultValue={0}
+                                style={{margin: "0 2px"}}
+                                onChange={this.onChangeRadius}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="show-nearby">
+                        <Button
+                            className="show-nearby-btn"
+                            size="large"
+                            onClick={this.showSatellite} // 用户点击时触发这个函数
+                        >
+                            Find Nearby Satellites
+                        </Button>
                     </div>
                 </div>
             </div>
