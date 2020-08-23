@@ -2,7 +2,7 @@
     padding: 10px;
     border: 2px solid #ccc;
     margin-top: 10px;
-    height: 410px;
+    height: 450px;
 }
 
 .sat-list-btn {
@@ -15,5 +15,7 @@
 
 .sat-list {
     height: 335px;
-    overflow: scroll;
+    overflow: hidden;
+    overflow-x: scroll;
+    overflow-y: scroll;
   }
